@@ -1,0 +1,41 @@
+.button {
+  padding: 20px 24px;
+  border: none;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: var(--font-bold);
+  outline: none;
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out;
+}
+
+/* Primary variant (default) */
+.primary {
+  background-color: var(--orange-100);
+  color: var(--white-100);
+}
+
+.primary:hover {
+  background-color: var(--orange-80);
+}
+
+.primary:active {
+  background-color: var(--orange-120);
+}
+
+/* Secondary variant */
+.secondary {
+  border: 1px solid var(--black-40);
+  background-color: transparent;
+  color: var(--black-100);
+}
+
+.secondary:hover {
+  border-color: var(--orange-100);
+  background-color: transparent;
+}
+
+.secondary:active {
+  border-color: var(--orange-120);
+  background-color: transparent;
+}
