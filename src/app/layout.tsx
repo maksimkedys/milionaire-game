@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { fonts } from '@/fonts';
+import { ErrorBoundary } from '@/shared/ui';
 import '@/styles/globals.css';
 
 interface Input {
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Input) => {
     return (
         <html lang="en">
-            <body className={fonts.inter}>{children}</body>
+            <body className={fonts.inter}>
+                <ErrorBoundary>{children}</ErrorBoundary>
+            </body>
         </html>
     );
 };

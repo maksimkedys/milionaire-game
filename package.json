@@ -7,13 +7,19 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
-        "format": "prettier -w \"src/**/*.{js,jsx,ts,tsx,scss}\""
+        "lint:fix": "eslint --fix",
+        "format": "prettier -w \"src/**/*.{js,jsx,ts,tsx,scss}\"",
+        "test": "echo \"Running tests...\" && yarn lint && yarn type-check",
+        "type-check": "tsc --noEmit",
+        "prepare": "husky install",
+        "postinstall": "husky install"
     },
     "dependencies": {
         "classnames": "^2.5.1",
         "next": "16.1.6",
         "react": "19.2.3",
-        "react-dom": "19.2.3"
+        "react-dom": "19.2.3",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@types/classnames": "^2.3.0",

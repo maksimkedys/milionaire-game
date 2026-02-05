@@ -6,6 +6,12 @@ import { MoneyLevelStatus, AppLink, GameStatus } from '@/shared/types';
 import type { MoneyLevel } from '../types';
 import type { GameConfigQuestion } from '../config/gameConfig.types';
 import { DELAY_BEFORE_REVEAL, DELAY_BEFORE_NEXT } from '../constants';
+import {
+    calculateReward,
+    determineGameStatus,
+    isLastQuestion,
+    createGameResult,
+} from '../logic';
 import useGameResult from './useGameResult';
 
 interface GameControllerState {
@@ -87,7 +93,6 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         [questions, state.currentQuestionIndex]
     );
 
-    // Handle reveal after selection
     useEffect(() => {
         if (state.selectedAnswerId && !state.isRevealed) {
             const timer = setTimeout(() => {
@@ -98,52 +103,55 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         }
     }, [state.selectedAnswerId, state.isRevealed]);
 
-    // Handle next question or navigation after reveal
     useEffect(() => {
         if (!state.isRevealed || !currentQuestion || !state.selectedAnswerId) {
             return;
         }
 
-        const isCorrect = currentQuestion.correctAnswerIds.includes(
-            state.selectedAnswerId
-        );
-
         const timer = setTimeout(() => {
-            if (isCorrect) {
-                const newEarned = currentQuestion.reward;
-                const isLastQuestion =
-                    state.currentQuestionIndex === questions.length - 1;
-
-                if (isLastQuestion) {
-                    pendingResultRef.current = {
-                        earned: newEarned,
-                        status: GameStatus.Won,
-                    };
-                    saveResult({ earned: newEarned, status: GameStatus.Won });
-                    router.push(AppLink.Result);
-                } else {
-                    dispatch({ type: 'NEXT_QUESTION', earned: newEarned });
-                }
-            } else {
-                pendingResultRef.current = {
-                    earned: state.earned,
-                    status: GameStatus.Lost,
-                };
-                saveResult({ earned: state.earned, status: GameStatus.Lost });
-                router.push(AppLink.Result);
-            }
+            handleAnswerResult();
         }, DELAY_BEFORE_NEXT);
 
         return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.isRevealed, state.selectedAnswerId]);
+
+    const handleAnswerResult = useCallback(() => {
+        if (!currentQuestion || !state.selectedAnswerId) return;
+
+        const isCorrect = currentQuestion.correctAnswerIds.includes(
+            state.selectedAnswerId
+        );
+        const newEarned = calculateReward(
+            isCorrect,
+            currentQuestion.reward,
+            state.earned
+        );
+        const isLast = isLastQuestion(
+            state.currentQuestionIndex,
+            questions.length
+        );
+        const gameStatus = determineGameStatus(isCorrect, isLast);
+
+        if (gameStatus === GameStatus.Won || gameStatus === GameStatus.Lost) {
+            const result = createGameResult(
+                newEarned,
+                gameStatus as GameStatus.Won | GameStatus.Lost
+            );
+            pendingResultRef.current = result;
+            saveResult(result);
+            router.push(AppLink.Result);
+        } else {
+            dispatch({ type: 'NEXT_QUESTION', earned: newEarned });
+        }
     }, [
-        state.isRevealed,
-        state.selectedAnswerId,
-        state.currentQuestionIndex,
-        state.earned,
         currentQuestion,
+        state.selectedAnswerId,
+        state.earned,
+        state.currentQuestionIndex,
         questions.length,
-        router,
         saveResult,
+        router,
     ]);
 
     const selectAnswer = useCallback(

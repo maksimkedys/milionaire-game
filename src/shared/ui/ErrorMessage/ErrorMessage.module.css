@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+    background: var(--black-5);
+}
+
+.content {
+    text-align: left;
+    max-width: 700px;
+    padding: 40px;
+    background: var(--white-100);
+    border-radius: 12px;
+    border: 1px solid var(--black-40);
+}
+
+.title {
+    color: var(--red-100);
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: var(--font-bold);
+    text-align: center;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message {
+    color: var(--black-100);
+    line-height: 1.6;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    padding: 4px 0;
+}

@@ -1,16 +1,27 @@
 'use client';
 
-import { Button, Heading, Text, ThumbImage } from '@/shared/ui';
+import {
+    Button,
+    Heading,
+    Text,
+    ThumbImage,
+    ErrorMessage,
+} from '@/shared/ui';
 import { formatMoney } from '@/shared/lib';
 import { ButtonVariant, AppLink, GameStatus } from '@/shared/types';
 import { useGameResult } from '@/features/game/hooks';
 import styles from './ResultSummary.module.css';
 
 const ResultSummary = () => {
-    const { result, isReady, clearResult } = useGameResult();
+    const { result, clearResult } = useGameResult();
 
-    if (!isReady || !result) {
-        return null;
+    if (!result) {
+        return (
+            <ErrorMessage
+                title="No game results found"
+                message="It seems you haven't played yet. Start a new game!"
+            />
+        );
     }
 
     const isWon = result.status === GameStatus.Won;

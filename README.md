@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Millionaire Game
 
-## Getting Started
+"Who Wants to Be a Millionaire?" game built with Next.js 16, React 19, TypeScript, and Zod validation.
 
-First, run the development server:
+## 🚀 Features
+
+- ✅ **TypeScript** - Full type safety
+- ✅ **Runtime Validation** - Zod schemas for config and data
+- ✅ **Error Boundaries** - Graceful error handling
+- ✅ **Feature-Sliced Design** - Clean architecture
+- ✅ **Git Hooks** - Automatic code quality checks
+- ✅ **404 Page** - Custom not found page
+- ✅ **Responsive Design** - Mobile and desktop support
+
+## 📋 Prerequisites
+
+- Node.js 18+ or 20+
+- Yarn 1.x or newer
+
+## 🛠️ Getting Started
+
+### 1. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to see the game.
 
-## Learn More
+### 3. Build for production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn build
+yarn start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command | Description |
+|---------|-------------|
+| `yarn dev` | Start development server |
+| `yarn build` | Build for production |
+| `yarn start` | Start production server |
+| `yarn lint` | Run ESLint |
+| `yarn lint:fix` | Fix ESLint errors |
+| `yarn format` | Format code with Prettier |
+| `yarn test` | Run all tests (lint + type-check) |
+| `yarn type-check` | Check TypeScript types |
 
-## Deploy on Vercel
+## 🪝 Git Hooks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project uses **Husky** and **lint-staged** for automatic code quality checks:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Pre-commit Hook
+Runs on `git commit`:
+- ✅ ESLint on staged files
+- ✅ Prettier formatting
+- ✅ Auto-fix issues when possible
+
+### Pre-push Hook
+Runs on `git push`:
+- ✅ Full ESLint check
+- ✅ TypeScript type checking
+- ✅ Ensures code quality before pushing
+
+See [GIT_HOOKS.md](./GIT_HOOKS.md) for detailed documentation.
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (home)/            # Home page
+│   ├── (game-flow)/       # Game and result pages
+│   ├── layout.tsx         # Root layout
+│   └── not-found.tsx      # 404 page
+├── features/              # Feature modules
+│   ├── game/              # Game logic and components
+│   │   ├── components/    # Game UI components
+│   │   ├── config/        # Game configuration
+│   │   ├── hooks/         # Game hooks
+│   │   ├── lib/           # Utility functions
+│   │   ├── schemas/       # Zod validation schemas
+│   │   └── logic.ts       # Pure business logic
+│   └── result/            # Result page feature
+├── shared/                # Shared code
+│   ├── ui/                # Reusable UI components
+│   ├── lib/               # Utility functions
+│   └── types/             # Shared types
+└── styles/                # Global styles
+```
+
+## 🎯 Architecture Highlights
+
+### Runtime Validation with Zod
+- ✅ Game config validation
+- ✅ Cookie data validation
+- ✅ Detailed error messages
+
+### Error Handling
+- ✅ Error Boundaries for React errors
+- ✅ ErrorMessage component for user-facing errors
+- ✅ LoadingSpinner for async states
+- ✅ Graceful fallbacks everywhere
+
+### Code Quality
+- ✅ ESLint + Prettier
+- ✅ TypeScript strict mode
+- ✅ Git hooks for automatic checks
+- ✅ Feature-Sliced Design architecture
+
+## 📚 Documentation
+
+- [GIT_HOOKS.md](./GIT_HOOKS.md) - Git hooks setup and usage
+- [IMPROVEMENTS.md](./IMPROVEMENTS.md) - Architecture improvements log
+- [YARN_MIGRATION.md](./YARN_MIGRATION.md) - Yarn migration details
+
+## 🔧 Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **UI Library:** React 19
+- **Language:** TypeScript 5
+- **Validation:** Zod
+- **Styling:** CSS Modules
+- **Code Quality:** ESLint, Prettier
+- **Git Hooks:** Husky, lint-staged
+
+## 📦 Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `eslint.config.mjs` | ESLint rules |
+| `.prettierrc.json` | Prettier formatting |
+| `.lintstagedrc.json` | lint-staged config |
+| `tsconfig.json` | TypeScript config |
+| `.husky/` | Git hooks |
+
+## 🤝 Contributing
+
+1. Make your changes
+2. Run `yarn test` to ensure quality
+3. Commit (hooks will run automatically)
+4. Push (tests will run automatically)
+
+## 📄 License
+
+This project is for educational purposes.
