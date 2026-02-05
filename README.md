@@ -69,8 +69,6 @@ Runs on `git push`:
 - ✅ TypeScript type checking
 - ✅ Ensures code quality before pushing
 
-See [GIT_HOOKS.md](./GIT_HOOKS.md) for detailed documentation.
-
 ## 🏗️ Project Structure
 
 ```
@@ -114,12 +112,6 @@ src/
 - ✅ TypeScript strict mode
 - ✅ Git hooks for automatic checks
 - ✅ Feature-Sliced Design architecture
-
-## 📚 Documentation
-
-- [GIT_HOOKS.md](./GIT_HOOKS.md) - Git hooks setup and usage
-- [IMPROVEMENTS.md](./IMPROVEMENTS.md) - Architecture improvements log
-- [YARN_MIGRATION.md](./YARN_MIGRATION.md) - Yarn migration details
 
 ## 🔧 Tech Stack
 
