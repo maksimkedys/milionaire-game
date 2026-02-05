@@ -4,144 +4,144 @@
             "id": "q1",
             "text": "What is the capital of France?",
             "answers": [
-                { "id": "a", "text": "London" },
-                { "id": "b", "text": "Paris" },
-                { "id": "c", "text": "Berlin" },
-                { "id": "d", "text": "Madrid" }
+                { "id": "q1a", "text": "London" },
+                { "id": "q1b", "text": "Paris" },
+                { "id": "q1c", "text": "Berlin" },
+                { "id": "q1d", "text": "Madrid" }
             ],
-            "correctAnswerIds": ["b"],
+            "correctAnswerIds": ["q1b"],
             "reward": 500
         },
         {
             "id": "q2",
             "text": "Which planet is known as the Red Planet?",
             "answers": [
-                { "id": "a", "text": "Venus" },
-                { "id": "b", "text": "Jupiter" },
-                { "id": "c", "text": "Mars" },
-                { "id": "d", "text": "Saturn" }
+                { "id": "q2a", "text": "Venus" },
+                { "id": "q2b", "text": "Jupiter" },
+                { "id": "q2c", "text": "Mars" },
+                { "id": "q2d", "text": "Saturn" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q2c"],
             "reward": 1000
         },
         {
             "id": "q3",
             "text": "What is 15 × 15?",
             "answers": [
-                { "id": "a", "text": "200" },
-                { "id": "b", "text": "225" },
-                { "id": "c", "text": "250" },
-                { "id": "d", "text": "215" }
+                { "id": "q3a", "text": "200" },
+                { "id": "q3b", "text": "225" },
+                { "id": "q3c", "text": "250" },
+                { "id": "q3d", "text": "215" }
             ],
-            "correctAnswerIds": ["b"],
+            "correctAnswerIds": ["q3b"],
             "reward": 2000
         },
         {
             "id": "q4",
             "text": "Who wrote 'Romeo and Juliet'?",
             "answers": [
-                { "id": "a", "text": "Charles Dickens" },
-                { "id": "b", "text": "Mark Twain" },
-                { "id": "c", "text": "William Shakespeare" },
-                { "id": "d", "text": "Jane Austen" }
+                { "id": "q4a", "text": "Charles Dickens" },
+                { "id": "q4b", "text": "Mark Twain" },
+                { "id": "q4c", "text": "William Shakespeare" },
+                { "id": "q4d", "text": "Jane Austen" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q4c"],
             "reward": 4000
         },
         {
             "id": "q5",
             "text": "How old your elder brother was 10 years before you was born, mate?",
             "answers": [
-                { "id": "a", "text": "10 years" },
-                { "id": "b", "text": "11 years" },
-                { "id": "c", "text": "12 years" },
-                { "id": "d", "text": "14 years" }
+                { "id": "q5a", "text": "10 years" },
+                { "id": "q5b", "text": "11 years" },
+                { "id": "q5c", "text": "12 years" },
+                { "id": "q5d", "text": "14 years" }
             ],
-            "correctAnswerIds": ["a"],
+            "correctAnswerIds": ["q5a"],
             "reward": 8000
         },
         {
             "id": "q6",
             "text": "What is the largest ocean on Earth?",
             "answers": [
-                { "id": "a", "text": "Atlantic Ocean" },
-                { "id": "b", "text": "Indian Ocean" },
-                { "id": "c", "text": "Arctic Ocean" },
-                { "id": "d", "text": "Pacific Ocean" }
+                { "id": "q6a", "text": "Atlantic Ocean" },
+                { "id": "q6b", "text": "Indian Ocean" },
+                { "id": "q6c", "text": "Arctic Ocean" },
+                { "id": "q6d", "text": "Pacific Ocean" }
             ],
-            "correctAnswerIds": ["d"],
+            "correctAnswerIds": ["q6d"],
             "reward": 16000
         },
         {
             "id": "q7",
             "text": "In what year did World War II end?",
             "answers": [
-                { "id": "a", "text": "1943" },
-                { "id": "b", "text": "1945" },
-                { "id": "c", "text": "1947" },
-                { "id": "d", "text": "1950" }
+                { "id": "q7a", "text": "1943" },
+                { "id": "q7b", "text": "1945" },
+                { "id": "q7c", "text": "1947" },
+                { "id": "q7d", "text": "1950" }
             ],
-            "correctAnswerIds": ["b"],
+            "correctAnswerIds": ["q7b"],
             "reward": 32000
         },
         {
             "id": "q8",
             "text": "What is the chemical symbol for gold?",
             "answers": [
-                { "id": "a", "text": "Go" },
-                { "id": "b", "text": "Gd" },
-                { "id": "c", "text": "Au" },
-                { "id": "d", "text": "Ag" }
+                { "id": "q8a", "text": "Go" },
+                { "id": "q8b", "text": "Gd" },
+                { "id": "q8c", "text": "Au" },
+                { "id": "q8d", "text": "Ag" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q8c"],
             "reward": 64000
         },
         {
             "id": "q9",
             "text": "Which country has the most natural lakes?",
             "answers": [
-                { "id": "a", "text": "USA" },
-                { "id": "b", "text": "Russia" },
-                { "id": "c", "text": "Canada" },
-                { "id": "d", "text": "Brazil" }
+                { "id": "q9a", "text": "USA" },
+                { "id": "q9b", "text": "Russia" },
+                { "id": "q9c", "text": "Canada" },
+                { "id": "q9d", "text": "Brazil" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q9c"],
             "reward": 125000
         },
         {
             "id": "q10",
             "text": "What is the speed of light in km/s approximately?",
             "answers": [
-                { "id": "a", "text": "150,000 km/s" },
-                { "id": "b", "text": "300,000 km/s" },
-                { "id": "c", "text": "450,000 km/s" },
-                { "id": "d", "text": "600,000 km/s" }
+                { "id": "q10a", "text": "150,000 km/s" },
+                { "id": "q10b", "text": "300,000 km/s" },
+                { "id": "q10c", "text": "450,000 km/s" },
+                { "id": "q10d", "text": "600,000 km/s" }
             ],
-            "correctAnswerIds": ["b"],
+            "correctAnswerIds": ["q10b"],
             "reward": 250000
         },
         {
             "id": "q11",
             "text": "Who painted the Mona Lisa?",
             "answers": [
-                { "id": "a", "text": "Vincent van Gogh" },
-                { "id": "b", "text": "Pablo Picasso" },
-                { "id": "c", "text": "Leonardo da Vinci" },
-                { "id": "d", "text": "Michelangelo" }
+                { "id": "q11a", "text": "Vincent van Gogh" },
+                { "id": "q11b", "text": "Pablo Picasso" },
+                { "id": "q11c", "text": "Leonardo da Vinci" },
+                { "id": "q11d", "text": "Michelangelo" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q11c"],
             "reward": 500000
         },
         {
             "id": "q12",
             "text": "What is the rarest blood type in humans?",
             "answers": [
-                { "id": "a", "text": "O negative" },
-                { "id": "b", "text": "B negative" },
-                { "id": "c", "text": "AB negative" },
-                { "id": "d", "text": "A negative" }
+                { "id": "q12a", "text": "O negative" },
+                { "id": "q12b", "text": "B negative" },
+                { "id": "q12c", "text": "AB negative" },
+                { "id": "q12d", "text": "A negative" }
             ],
-            "correctAnswerIds": ["c"],
+            "correctAnswerIds": ["q12c"],
             "reward": 1000000
         }
     ]

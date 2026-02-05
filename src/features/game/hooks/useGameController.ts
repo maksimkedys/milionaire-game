@@ -1,21 +1,31 @@
 'use client';
 
-import { useReducer, useCallback, useMemo } from 'react';
+import { useReducer, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoneyLevelStatus, AppLink, GameStatus } from '@/shared/types';
+import type { MoneyLevel } from '../types';
 import type { GameConfigQuestion } from '../config/gameConfig.types';
-import { useGameResult } from './useGameResult';
+import { DELAY_BEFORE_REVEAL, DELAY_BEFORE_NEXT } from '../constants';
+import useGameResult from './useGameResult';
 
 interface GameControllerState {
     currentQuestionIndex: number;
     earned: number;
+    selectedAnswerId: string | null;
+    isRevealed: boolean;
 }
 
-type GameAction = { type: 'NEXT_QUESTION'; earned: number } | { type: 'RESET' };
+type GameAction =
+    | { type: 'SELECT_ANSWER'; answerId: string }
+    | { type: 'REVEAL_ANSWER' }
+    | { type: 'NEXT_QUESTION'; earned: number }
+    | { type: 'RESET' };
 
 const initialState: GameControllerState = {
     currentQuestionIndex: 0,
     earned: 0,
+    selectedAnswerId: null,
+    isRevealed: false,
 };
 
 const gameReducer = (
@@ -23,10 +33,25 @@ const gameReducer = (
     action: GameAction
 ): GameControllerState => {
     switch (action.type) {
+        case 'SELECT_ANSWER':
+            return {
+                ...state,
+                selectedAnswerId: action.answerId,
+            };
+
+        case 'REVEAL_ANSWER':
+            return {
+                ...state,
+                isRevealed: true,
+            };
+
         case 'NEXT_QUESTION':
             return {
+                ...state,
                 currentQuestionIndex: state.currentQuestionIndex + 1,
                 earned: action.earned,
+                selectedAnswerId: null,
+                isRevealed: false,
             };
 
         case 'RESET':
@@ -37,15 +62,14 @@ const gameReducer = (
     }
 };
 
-interface MoneyLevel {
-    amount: number;
-    status: MoneyLevelStatus;
-}
-
 export const useGameController = (questions: GameConfigQuestion[]) => {
     const router = useRouter();
     const [state, dispatch] = useReducer(gameReducer, initialState);
-    const { save: saveResult } = useGameResult();
+    const { saveResult } = useGameResult();
+    const pendingResultRef = useRef<{
+        earned: number;
+        status: GameStatus.Won | GameStatus.Lost;
+    } | null>(null);
 
     const currentQuestion = questions[state.currentQuestionIndex];
 
@@ -63,37 +87,71 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         [questions, state.currentQuestionIndex]
     );
 
-    const submitAnswer = useCallback(
-        (answerId: string) => {
-            if (!currentQuestion) return;
+    // Handle reveal after selection
+    useEffect(() => {
+        if (state.selectedAnswerId && !state.isRevealed) {
+            const timer = setTimeout(() => {
+                dispatch({ type: 'REVEAL_ANSWER' });
+            }, DELAY_BEFORE_REVEAL);
 
-            const isCorrect =
-                currentQuestion.correctAnswerIds.includes(answerId);
+            return () => clearTimeout(timer);
+        }
+    }, [state.selectedAnswerId, state.isRevealed]);
 
+    // Handle next question or navigation after reveal
+    useEffect(() => {
+        if (!state.isRevealed || !currentQuestion || !state.selectedAnswerId) {
+            return;
+        }
+
+        const isCorrect = currentQuestion.correctAnswerIds.includes(
+            state.selectedAnswerId
+        );
+
+        const timer = setTimeout(() => {
             if (isCorrect) {
                 const newEarned = currentQuestion.reward;
                 const isLastQuestion =
                     state.currentQuestionIndex === questions.length - 1;
 
                 if (isLastQuestion) {
+                    pendingResultRef.current = {
+                        earned: newEarned,
+                        status: GameStatus.Won,
+                    };
                     saveResult({ earned: newEarned, status: GameStatus.Won });
                     router.push(AppLink.Result);
                 } else {
                     dispatch({ type: 'NEXT_QUESTION', earned: newEarned });
                 }
             } else {
+                pendingResultRef.current = {
+                    earned: state.earned,
+                    status: GameStatus.Lost,
+                };
                 saveResult({ earned: state.earned, status: GameStatus.Lost });
                 router.push(AppLink.Result);
             }
+        }, DELAY_BEFORE_NEXT);
+
+        return () => clearTimeout(timer);
+    }, [
+        state.isRevealed,
+        state.selectedAnswerId,
+        state.currentQuestionIndex,
+        state.earned,
+        currentQuestion,
+        questions.length,
+        router,
+        saveResult,
+    ]);
+
+    const selectAnswer = useCallback(
+        (answerId: string) => {
+            if (state.selectedAnswerId || !currentQuestion) return;
+            dispatch({ type: 'SELECT_ANSWER', answerId });
         },
-        [
-            state.currentQuestionIndex,
-            state.earned,
-            currentQuestion,
-            questions.length,
-            router,
-            saveResult,
-        ]
+        [state.selectedAnswerId, currentQuestion]
     );
 
     return {
@@ -101,6 +159,8 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         currentQuestionIndex: state.currentQuestionIndex,
         earned: state.earned,
         moneyLevels,
-        submitAnswer,
+        selectedAnswerId: state.selectedAnswerId,
+        isRevealed: state.isRevealed,
+        selectAnswer,
     };
 };

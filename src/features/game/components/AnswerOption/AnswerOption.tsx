@@ -1,5 +1,6 @@
 'use client';
 
+import cn from 'classnames';
 import { AnswerStatus } from '@/shared/types';
 import styles from './AnswerOption.module.css';
 
@@ -20,7 +21,7 @@ const AnswerOption = ({
 }: AnswerOptionProps) => (
     <button
         type="button"
-        className={`${styles.option} ${styles[status]}`}
+        className={cn(styles.option, styles[status])}
         onClick={onClick}
         disabled={disabled}
     >

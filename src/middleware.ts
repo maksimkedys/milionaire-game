@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { GAME_RESULT_COOKIE } from '@/features/game/hooks/useGameResult';
+import { GAME_RESULT_COOKIE } from '@/features/game/constants';
 import { AppLink } from '@/shared/types';
 
 export function middleware(request: NextRequest) {

@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useCallback, useSyncExternalStore } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { GameStatus } from '@/shared/types';
-
-export const GAME_RESULT_COOKIE = 'game_result';
+import { GAME_RESULT_COOKIE } from '../constants';
 
 export interface GameResult {
     earned: number;
@@ -35,35 +34,35 @@ const clearCookie = (): void => {
     document.cookie = `${GAME_RESULT_COOKIE}=; path=/; max-age=0`;
 };
 
-const subscribe = (callback: () => void) => {
-    window.addEventListener('storage', callback);
-    return () => window.removeEventListener('storage', callback);
-};
+interface UseGameResult {
+    result: GameResult | null;
+    isReady: boolean;
+    saveResult: (result: GameResult) => void;
+    clearResult: VoidFunction;
+}
 
-const getServerSnapshot = (): GameResult | null => null;
+const useGameResult = (): UseGameResult => {
+    const [state, setState] = useState<{
+        result: GameResult | null;
+        isReady: boolean;
+    }>({ result: null, isReady: false });
 
-export const useGameResult = () => {
-    const result = useSyncExternalStore(
-        subscribe,
-        getCookie,
-        getServerSnapshot
-    );
-
-    const save = useCallback((data: GameResult) => {
-        setCookie(data);
-    }, []);
-
-    const clear = useCallback(() => {
-        clearCookie();
-    }, []);
-
-    return { result, save, clear };
-};
-
-export const useGameResultClear = () => {
     useEffect(() => {
-        return () => {
-            clearCookie();
-        };
+        // Initialize from cookie on client mount - valid pattern for external data sources
+        setState({ result: getCookie(), isReady: true }); // eslint-disable-line
     }, []);
+
+    const saveResult = useCallback((data: GameResult) => {
+        setCookie(data);
+        setState((prev) => ({ ...prev, result: data }));
+    }, []);
+
+    const clearResult = useCallback(() => {
+        clearCookie();
+        setState((prev) => ({ ...prev, result: null }));
+    }, []);
+
+    return { ...state, saveResult, clearResult };
 };
+
+export default useGameResult;

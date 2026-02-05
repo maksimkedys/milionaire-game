@@ -4,8 +4,11 @@ import type { ReactNode } from 'react';
 
 interface TextProps {
     children: ReactNode;
+    className?: string;
 }
 
-const Text = ({ children }: TextProps) => <p>{children}</p>;
+const Text = ({ children, className }: TextProps) => (
+    <p className={className}>{children}</p>
+);
 
 export default Text;

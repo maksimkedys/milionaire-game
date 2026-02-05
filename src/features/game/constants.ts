@@ -1,1 +1,4 @@
-export const TOTAL_QUESTIONS = 12;
+export const GAME_RESULT_COOKIE = 'game_result';
+
+export const DELAY_BEFORE_REVEAL = 1000;
+export const DELAY_BEFORE_NEXT = 1500;

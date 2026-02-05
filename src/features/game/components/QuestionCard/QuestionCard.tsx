@@ -1,5 +1,6 @@
 'use client';
 
+import { Heading } from '@/shared/ui';
 import styles from './QuestionCard.module.css';
 
 interface QuestionCardProps {
@@ -7,7 +8,9 @@ interface QuestionCardProps {
 }
 
 const QuestionCard = ({ question }: QuestionCardProps) => (
-    <h2 className={styles.question}>{question}</h2>
+    <Heading level={2} className={styles.question}>
+        {question}
+    </Heading>
 );
 
 export default QuestionCard;

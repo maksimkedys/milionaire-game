@@ -1,13 +1,15 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 30vh;
+  justify-content: center;
+  align-items: center;
+  gap: 56px;
+  flex: 1;
 }
 
 @media (max-width: 768px) {
   .content {
     width: 100%;
-    align-items: center;
-    gap: 20vh;
+    gap: 40px;
   }
 }

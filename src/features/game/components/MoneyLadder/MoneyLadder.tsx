@@ -1,19 +1,13 @@
 'use client';
 
-import { MoneyLevelStatus } from '@/shared/types';
+import cn from 'classnames';
+import type { MoneyLevel } from '../../types';
+import { formatMoney } from '@/shared/lib';
 import styles from './MoneyLadder.module.css';
-
-interface MoneyLevel {
-    amount: number;
-    status: MoneyLevelStatus;
-}
 
 interface MoneyLadderProps {
     levels: MoneyLevel[];
 }
-
-const formatMoney = (amount: number): string =>
-    `$${amount.toLocaleString('en-US')}`;
 
 const MoneyLadder = ({ levels }: MoneyLadderProps) => (
     <aside className={styles.ladder}>
@@ -21,7 +15,7 @@ const MoneyLadder = ({ levels }: MoneyLadderProps) => (
             {levels.map((level) => (
                 <li
                     key={level.amount}
-                    className={`${styles.level} ${styles[level.status]}`}
+                    className={cn(styles.level, styles[level.status])}
                 >
                     {formatMoney(level.amount)}
                 </li>

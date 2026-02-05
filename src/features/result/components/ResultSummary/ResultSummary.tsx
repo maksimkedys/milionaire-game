@@ -1,50 +1,45 @@
 'use client';
 
-import Image from 'next/image';
-import { Button } from '@/shared/ui';
+import { Button, Heading, Text, ThumbImage } from '@/shared/ui';
+import { formatMoney } from '@/shared/lib';
 import { ButtonVariant, AppLink, GameStatus } from '@/shared/types';
-import {
-    useGameResult,
-    useGameResultClear,
-} from '@/features/game/hooks/useGameResult';
+import { useGameResult } from '@/features/game/hooks';
 import styles from './ResultSummary.module.css';
 
-const formatMoney = (amount: number): string =>
-    `$${amount.toLocaleString('en-US')}`;
-
 const ResultSummary = () => {
-    const { result } = useGameResult();
-    useGameResultClear();
+    const { result, isReady, clearResult } = useGameResult();
 
-    if (!result) {
+    if (!isReady || !result) {
         return null;
     }
 
     const isWon = result.status === GameStatus.Won;
 
+    const handleTryAgain = () => {
+        clearResult();
+    };
+
     return (
         <main className={styles.main}>
-            <Image
-                src="/webp/thumb.webp"
-                alt="Result"
-                width={624}
-                height={368}
-                className={styles.image}
-            />
+            <ThumbImage className={styles.image} />
 
             <div className={styles.content}>
                 <div className={styles.info}>
-                    <p className={styles.label}>
+                    <Text className={styles.label}>
                         {isWon ? 'Congratulations!' : 'Total score:'}
-                    </p>
-                    <h1 className={styles.title}>
+                    </Text>
+                    <Heading className={styles.title}>
                         {isWon
                             ? 'You are a millionaire!'
                             : `${formatMoney(result.earned)} earned`}
-                    </h1>
+                    </Heading>
                 </div>
 
-                <Button href={AppLink.Game} variant={ButtonVariant.Primary}>
+                <Button
+                    href={AppLink.Game}
+                    variant={ButtonVariant.Primary}
+                    onClick={handleTryAgain}
+                >
                     Try again
                 </Button>
             </div>

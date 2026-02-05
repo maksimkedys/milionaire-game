@@ -8,9 +8,9 @@
     flex: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding-left: var(--container-padding);
+    padding: var(--container-padding);
     gap: 32px;
 }
 
