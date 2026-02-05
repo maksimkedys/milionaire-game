@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30vh;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    align-items: center;
+    gap: 20vh;
+  }
+}

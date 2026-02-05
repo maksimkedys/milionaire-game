@@ -8,6 +8,7 @@ import type {
 import Link from 'next/link';
 import { ButtonVariant } from '@/shared/types';
 import styles from './Button.module.css';
+import cn from 'classnames';
 
 type ButtonBaseProps = {
     children: ReactNode;
@@ -27,21 +28,20 @@ type ButtonAsLink = ButtonBaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-export const Button = (props: ButtonProps) => {
-    const {
-        children,
-        variant = ButtonVariant.Primary,
-        className,
-        ...rest
-    } = props;
+const Button = ({
+    children,
+    variant = ButtonVariant.Primary,
+    className,
+    ...rest
+}: ButtonProps) => {
+    const classes = cn(styles.button, styles[variant], className);
 
-    const classes = `${styles.button} ${styles[variant]} ${className ?? ''}`;
-
-    if ('href' in props && props.href) {
+    if ('href' in rest && rest.href) {
         const { href, ...linkProps } = rest as Omit<
             ButtonAsLink,
             keyof ButtonBaseProps
         >;
+
         return (
             <Link href={href} className={classes} {...linkProps}>
                 {children}
@@ -50,9 +50,12 @@ export const Button = (props: ButtonProps) => {
     }
 
     const buttonProps = rest as Omit<ButtonAsButton, keyof ButtonBaseProps>;
+
     return (
         <button type="button" className={classes} {...buttonProps}>
             {children}
         </button>
     );
 };
+
+export default Button;

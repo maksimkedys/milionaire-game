@@ -1,0 +1,148 @@
+{
+    "levels": [
+        {
+            "id": "q1",
+            "text": "What is the capital of France?",
+            "answers": [
+                { "id": "a", "text": "London" },
+                { "id": "b", "text": "Paris" },
+                { "id": "c", "text": "Berlin" },
+                { "id": "d", "text": "Madrid" }
+            ],
+            "correctAnswerIds": ["b"],
+            "reward": 500
+        },
+        {
+            "id": "q2",
+            "text": "Which planet is known as the Red Planet?",
+            "answers": [
+                { "id": "a", "text": "Venus" },
+                { "id": "b", "text": "Jupiter" },
+                { "id": "c", "text": "Mars" },
+                { "id": "d", "text": "Saturn" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 1000
+        },
+        {
+            "id": "q3",
+            "text": "What is 15 × 15?",
+            "answers": [
+                { "id": "a", "text": "200" },
+                { "id": "b", "text": "225" },
+                { "id": "c", "text": "250" },
+                { "id": "d", "text": "215" }
+            ],
+            "correctAnswerIds": ["b"],
+            "reward": 2000
+        },
+        {
+            "id": "q4",
+            "text": "Who wrote 'Romeo and Juliet'?",
+            "answers": [
+                { "id": "a", "text": "Charles Dickens" },
+                { "id": "b", "text": "Mark Twain" },
+                { "id": "c", "text": "William Shakespeare" },
+                { "id": "d", "text": "Jane Austen" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 4000
+        },
+        {
+            "id": "q5",
+            "text": "How old your elder brother was 10 years before you was born, mate?",
+            "answers": [
+                { "id": "a", "text": "10 years" },
+                { "id": "b", "text": "11 years" },
+                { "id": "c", "text": "12 years" },
+                { "id": "d", "text": "14 years" }
+            ],
+            "correctAnswerIds": ["a"],
+            "reward": 8000
+        },
+        {
+            "id": "q6",
+            "text": "What is the largest ocean on Earth?",
+            "answers": [
+                { "id": "a", "text": "Atlantic Ocean" },
+                { "id": "b", "text": "Indian Ocean" },
+                { "id": "c", "text": "Arctic Ocean" },
+                { "id": "d", "text": "Pacific Ocean" }
+            ],
+            "correctAnswerIds": ["d"],
+            "reward": 16000
+        },
+        {
+            "id": "q7",
+            "text": "In what year did World War II end?",
+            "answers": [
+                { "id": "a", "text": "1943" },
+                { "id": "b", "text": "1945" },
+                { "id": "c", "text": "1947" },
+                { "id": "d", "text": "1950" }
+            ],
+            "correctAnswerIds": ["b"],
+            "reward": 32000
+        },
+        {
+            "id": "q8",
+            "text": "What is the chemical symbol for gold?",
+            "answers": [
+                { "id": "a", "text": "Go" },
+                { "id": "b", "text": "Gd" },
+                { "id": "c", "text": "Au" },
+                { "id": "d", "text": "Ag" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 64000
+        },
+        {
+            "id": "q9",
+            "text": "Which country has the most natural lakes?",
+            "answers": [
+                { "id": "a", "text": "USA" },
+                { "id": "b", "text": "Russia" },
+                { "id": "c", "text": "Canada" },
+                { "id": "d", "text": "Brazil" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 125000
+        },
+        {
+            "id": "q10",
+            "text": "What is the speed of light in km/s approximately?",
+            "answers": [
+                { "id": "a", "text": "150,000 km/s" },
+                { "id": "b", "text": "300,000 km/s" },
+                { "id": "c", "text": "450,000 km/s" },
+                { "id": "d", "text": "600,000 km/s" }
+            ],
+            "correctAnswerIds": ["b"],
+            "reward": 250000
+        },
+        {
+            "id": "q11",
+            "text": "Who painted the Mona Lisa?",
+            "answers": [
+                { "id": "a", "text": "Vincent van Gogh" },
+                { "id": "b", "text": "Pablo Picasso" },
+                { "id": "c", "text": "Leonardo da Vinci" },
+                { "id": "d", "text": "Michelangelo" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 500000
+        },
+        {
+            "id": "q12",
+            "text": "What is the rarest blood type in humans?",
+            "answers": [
+                { "id": "a", "text": "O negative" },
+                { "id": "b", "text": "B negative" },
+                { "id": "c", "text": "AB negative" },
+                { "id": "d", "text": "A negative" }
+            ],
+            "correctAnswerIds": ["c"],
+            "reward": 1000000
+        }
+    ]
+}

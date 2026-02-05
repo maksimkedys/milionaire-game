@@ -1,4 +1,3 @@
-export * from './Button';
-export * from './Layout/PageContainer';
-export * from './Typography/Heading';
-export * from './Typography/Text';
+export { default as Button } from './Button';
+export { default as Heading } from './Typography/Heading';
+export { default as Text } from './Typography/Text';

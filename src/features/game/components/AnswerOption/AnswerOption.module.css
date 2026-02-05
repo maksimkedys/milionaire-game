@@ -1,0 +1,113 @@
+.option {
+    border-radius: 15px;
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--black-40);
+    transition: border 300ms ease, background 300ms ease;
+    position: relative;
+    background: var(--white-100);
+    color: var(--black-100);
+    font-size: 20px;
+    padding: 24px;
+    cursor: pointer;
+}
+
+.letter {
+    color: var(--orange-100);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.text {
+    color: var(--black-100);
+}
+
+.option::after,
+.option::before {
+    position: absolute;
+    transition: background-color 300ms ease;
+    content: '';
+    width: 17px;
+    height: 1px;
+    background: var(--black-40);
+    top: 50%;
+}
+
+.option::before {
+    transform: translateX(-100%);
+    left: 0;
+}
+
+.option::after {
+    transform: translateX(100%);
+    right: 0;
+}
+
+.default:not(:disabled):hover {
+    border: 1px solid var(--orange-100);
+}
+
+.default:not(:disabled):hover::before,
+.default:not(:disabled):hover::after {
+    background: var(--orange-100);
+}
+
+.selected {
+    border: 1px solid var(--orange-100);
+    background: var(--orange-5);
+}
+
+.selected::before,
+.selected::after {
+    background: var(--orange-100);
+}
+
+/* Correct state */
+.correct {
+    border: 1px solid var(--green-100);
+    background: var(--green-5);
+}
+
+.correct::before,
+.correct::after {
+    background: var(--green-100);
+}
+
+.correct .letter {
+    color: var(--green-100);
+}
+
+/* Wrong state */
+.wrong {
+    border: 1px solid var(--red-100);
+    background: var(--red-5);
+}
+
+.wrong::before,
+.wrong::after {
+    background: var(--red-100);
+}
+
+.wrong .letter {
+    color: var(--red-100);
+}
+
+/* Disabled state */
+.option:disabled {
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .option {
+        height: 56px;
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .letter {
+        font-size: 14px;
+    }
+}
