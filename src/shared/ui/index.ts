@@ -7,3 +7,4 @@ export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as MenuIcon } from './icons/MenuIcon';
 export { default as CloseIcon } from './icons/CloseIcon';
+export { default as DiamondShape } from './DiamondShape';

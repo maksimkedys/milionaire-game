@@ -1,101 +1,111 @@
 .ladder {
-  padding: 16px var(--reward-line);
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  background: var(--white-100);
+    position: relative;
+    min-height: 100vh;
+    background: var(--white-100);
 }
 
 .list {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .level {
-  border-radius: 9px;
-  width: 100%;
-  text-align: center;
-  gap: 8px;
-  border: 1px solid var(--black-40);
-  transition: border 300ms ease, color 300ms ease;
-  position: relative;
-  color: var(--black-100);
-  font-size: 20px;
-  padding: 8px;
+    width: 100%;
+    max-width: 376px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.level::after,
-.level::before {
-  position: absolute;
-  transition: background-color 300ms ease;
-  content: '';
-  width: var(--reward-line);
-  height: 1px;
-  background: var(--black-40);
-  top: 50%;
-  z-index: 2;
+.diamondShape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.level::before {
-  transform: translateX(-100%);
-  left: 0;
+.levelText {
+    position: relative;
+    z-index: 1;
+    color: var(--black-100);
+    font-size: 20px;
+    font-weight: var(--font-regular);
+    transition: color 300ms ease;
 }
 
-.level::after {
-  transform: translateX(100%);
-  right: 0;
+.current .levelText {
+    color: var(--orange-100);
 }
 
-/* Current level state */
-.current {
-  border: 1px solid var(--orange-100);
-  color: var(--orange-100);
+.passed .levelText {
+    color: var(--black-40);
 }
 
-.current::after,
-.current::before {
-  background: var(--orange-100);
+.default .levelText {
+    color: var(--black-100);
 }
 
-/* Passed level state */
-.passed {
-  color: var(--black-40);
+.menuWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: var(--black-5);
 }
 
-/* Default state */
-.default {
-  color: var(--black-100);
+.menuTopWrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+.burgerButton {
+    width: fit-content;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.burgerButton:hover {
+    opacity: 0.7;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    color: var(--black-100);
 }
 
 @media (max-width: 768px) {
-  .ladder {
-    background: transparent;
-    min-height: auto;
-    padding: 16px;
-  }
+    .ladder {
+        min-height: auto;
+        background: var(--black-5);
+    }
 
-  .list {
-    min-height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+    .list {
+        min-height: calc(100vh - 76px);
+    }
 
-  .level {
-    font-size: 14px;
-    width: auto;
-    padding: 8px 16px;
-  }
+    .level {
+        max-width: 100%;
+        height: 32px;
+    }
 
-  .level::before,
-  .level::after {
-    display: none;
-  }
+    .levelText {
+        font-size: 14px;
+    }
 }

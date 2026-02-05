@@ -16,7 +16,16 @@
 
 .sidebar {
     flex-shrink: 0;
-    min-width: 30%;
+    width: 376px;
+    background: var(--white-100);
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+    .sidebar {
+        flex-shrink: 1;
+        min-width: 300px;
+        width: 30%;
+    }
 }
 
 @media (max-width: 768px) {

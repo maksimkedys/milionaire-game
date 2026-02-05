@@ -1,110 +1,92 @@
 .option {
-    border-radius: 15px;
     height: 72px;
+    width: 100%;
+    max-width: 422px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
-    border: 1px solid var(--black-40);
-    transition: border 300ms ease, background 300ms ease;
+    justify-content: center;
     position: relative;
-    background: var(--white-100);
-    color: var(--black-100);
-    font-size: 20px;
-    padding: 24px;
+    background: transparent;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.diamondShape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .letter {
     color: var(--orange-100);
     font-size: 20px;
     font-weight: 600;
+    transition: color 300ms ease;
 }
 
 .text {
     color: var(--black-100);
+    font-size: 20px;
+    transition: color 300ms ease;
 }
 
-.option::after,
-.option::before {
-    position: absolute;
-    transition: background-color 300ms ease;
-    content: '';
-    width: 17px;
-    height: 1px;
-    background: var(--black-40);
-    top: 50%;
-}
-
-.option::before {
-    transform: translateX(-100%);
-    left: 0;
-}
-
-.option::after {
-    transform: translateX(100%);
-    right: 0;
-}
-
-.default:not(:disabled):hover {
-    border: 1px solid var(--orange-100);
-}
-
-.default:not(:disabled):hover::before,
-.default:not(:disabled):hover::after {
-    background: var(--orange-100);
-}
-
-.selected {
-    border: 1px solid var(--orange-100);
-    background: var(--orange-5);
-}
-
-.selected::before,
-.selected::after {
-    background: var(--orange-100);
-}
-
-.correct {
-    border: 1px solid var(--green-100);
-    background: var(--green-5);
-}
-
-.correct::before,
-.correct::after {
-    background: var(--green-100);
+.correct .diamondShape path:last-child {
+    fill: var(--green-5);
+    stroke: var(--green-100);
 }
 
 .correct .letter {
     color: var(--green-100);
 }
 
-.wrong {
-    border: 1px solid var(--red-100);
-    background: var(--red-5);
-}
-
-.wrong::before,
-.wrong::after {
-    background: var(--red-100);
+.wrong .diamondShape path:last-child {
+    fill: var(--red-5);
+    stroke: var(--red-100);
 }
 
 .wrong .letter {
     color: var(--red-100);
 }
 
+.selected .diamondShape path:last-child {
+    fill: var(--orange-5);
+    stroke: var(--orange-100);
+}
+
+.default:not(:disabled):hover .diamondShape path:last-child {
+    stroke: var(--orange-100);
+}
+
 .option:disabled {
     cursor: not-allowed;
+    opacity: 0.6;
 }
 
 @media (max-width: 768px) {
     .option {
         height: 56px;
-        font-size: 14px;
-        padding: 20px;
+        max-width: 100%;
     }
 
     .letter {
+        font-size: 14px;
+    }
+
+    .text {
         font-size: 14px;
     }
 }
