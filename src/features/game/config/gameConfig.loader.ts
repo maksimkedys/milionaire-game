@@ -2,9 +2,6 @@ import type { GameConfig } from './gameConfig.types';
 import { validateGameConfig } from './gameConfig.schema';
 import { ZodError } from 'zod';
 
-/**
- * Форматує Zod помилки в читабельний текст
- */
 const formatZodError = (error: ZodError): string => {
     const errors = error.issues.map((issue) => {
         const path = issue.path.join(' → ');
