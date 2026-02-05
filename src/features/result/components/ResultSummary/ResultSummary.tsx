@@ -1,12 +1,6 @@
 'use client';
 
-import {
-    Button,
-    Heading,
-    Text,
-    ThumbImage,
-    ErrorMessage,
-} from '@/shared/ui';
+import { Button, Heading, Text, ThumbImage, ErrorMessage } from '@/shared/ui';
 import { formatMoney } from '@/shared/lib';
 import { ButtonVariant, AppLink, GameStatus } from '@/shared/types';
 import { useGameResult } from '@/features/game/hooks';

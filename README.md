@@ -50,7 +50,10 @@ yarn start
 | `yarn lint` | Run ESLint |
 | `yarn lint:fix` | Fix ESLint errors |
 | `yarn format` | Format code with Prettier |
-| `yarn test` | Run all tests (lint + type-check) |
+| `yarn test` | Run all tests (lint + type-check + unit tests) |
+| `yarn test:unit` | Run Jest unit tests only |
+| `yarn test:watch` | Run Jest in watch mode |
+| `yarn test:coverage` | Run tests with coverage report |
 | `yarn type-check` | Check TypeScript types |
 
 ## 🪝 Git Hooks
@@ -67,6 +70,7 @@ Runs on `git commit`:
 Runs on `git push`:
 - ✅ Full ESLint check
 - ✅ TypeScript type checking
+- ✅ Jest unit tests
 - ✅ Ensures code quality before pushing
 
 ## 🏗️ Project Structure
@@ -120,8 +124,13 @@ src/
 - **Language:** TypeScript 5
 - **Validation:** Zod
 - **Styling:** CSS Modules
+- **Testing:** Jest, React Testing Library
 - **Code Quality:** ESLint, Prettier
 - **Git Hooks:** Husky, lint-staged
+
+## 📚 Documentation
+
+- [TESTING.md](./TESTING.md) - Testing guide and coverage
 
 ## 📦 Configuration Files
 
@@ -129,8 +138,9 @@ src/
 |------|---------|
 | `eslint.config.mjs` | ESLint rules |
 | `.prettierrc.json` | Prettier formatting |
-| `.lintstagedrc.json` | lint-staged config |
+| `package.json` | lint-staged config (in "lint-staged" key) |
 | `tsconfig.json` | TypeScript config |
+| `jest.config.js` | Jest test configuration |
 | `.husky/` | Git hooks |
 
 ## 🤝 Contributing

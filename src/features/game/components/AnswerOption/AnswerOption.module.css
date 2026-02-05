@@ -65,7 +65,6 @@
     background: var(--orange-100);
 }
 
-/* Correct state */
 .correct {
     border: 1px solid var(--green-100);
     background: var(--green-5);
@@ -80,7 +79,6 @@
     color: var(--green-100);
 }
 
-/* Wrong state */
 .wrong {
     border: 1px solid var(--red-100);
     background: var(--red-5);
@@ -95,7 +93,6 @@
     color: var(--red-100);
 }
 
-/* Disabled state */
 .option:disabled {
     cursor: not-allowed;
 }
