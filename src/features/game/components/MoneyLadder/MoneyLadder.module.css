@@ -55,18 +55,17 @@
     color: var(--black-100);
 }
 
-.menuWrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
+.menuTopWrapper {
+    display: none;
+    justify-content: flex-end;
+    padding: 16px;
     background: var(--black-5);
 }
 
-.menuTopWrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px;
+@media (max-width: 768px) {
+    .menuTopWrapper {
+        display: flex;
+    }
 }
 
 .burgerButton {
@@ -92,8 +91,13 @@
 
 @media (max-width: 768px) {
     .ladder {
+        display: none;
         min-height: auto;
         background: var(--black-5);
+    }
+
+    .ladderVisible {
+        display: block;
     }
 
     .list {

@@ -3,9 +3,6 @@
     width: 100%;
     max-width: 422px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     position: relative;
     background: transparent;
     border: none;
@@ -28,7 +25,11 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 0 0 48px;
     gap: 8px;
+    font-family: var(--font-inter);
 }
 
 .letter {
@@ -76,10 +77,20 @@
     opacity: 0.6;
 }
 
+@media (max-width: 900px) {
+    .content {
+        padding: 0 26px;
+    }
+}
+
 @media (max-width: 768px) {
     .option {
         height: 56px;
         max-width: 100%;
+    }
+
+    .content {
+        padding: 0 64px;
     }
 
     .letter {
@@ -88,5 +99,11 @@
 
     .text {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 0 44px;
     }
 }

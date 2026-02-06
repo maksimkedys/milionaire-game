@@ -4,7 +4,6 @@
     color: var(--black-100);
     max-width: 624px;
     width: 100%;
-    text-align: center;
 }
 
 @media (max-width: 768px) {

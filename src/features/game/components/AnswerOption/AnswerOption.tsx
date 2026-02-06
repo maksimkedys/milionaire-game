@@ -1,7 +1,7 @@
 'use client';
 
 import cn from 'classnames';
-import { AnswerStatus } from '@/shared/types';
+import { AnswerStatus, DiamondShapeType } from '@/shared/types';
 import { DiamondShape } from '@/shared/ui';
 import styles from './AnswerOption.module.css';
 
@@ -29,6 +29,7 @@ const AnswerOption = ({
         <DiamondShape
             isActive={status === AnswerStatus.Selected}
             className={styles.diamondShape}
+            type={DiamondShapeType.Answer}
         />
         <span className={styles.content}>
             <span className={styles.letter}>{letter}</span>

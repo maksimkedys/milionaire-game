@@ -28,3 +28,8 @@ export enum GameStatus {
     Won = 'won',
     Lost = 'lost',
 }
+
+export enum DiamondShapeType {
+    Prize = 'prize',
+    Answer = 'answer',
+}

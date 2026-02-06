@@ -10,6 +10,9 @@ interface Input {
 export const metadata: Metadata = {
     title: 'Millionaire game',
     description: 'Who wants to be a millionaire?',
+    icons: {
+        icon: '/icon.svg',
+    },
 };
 
 const RootLayout = ({ children }: Input) => {

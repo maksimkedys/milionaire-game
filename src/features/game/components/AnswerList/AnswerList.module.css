@@ -2,14 +2,12 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(280px, 422px));
     grid-row-gap: 32px;
-    justify-content: center;
     max-width: 100%;
 }
 
 @media (max-width: 1200px) {
     .grid {
-        grid-template-columns: repeat(2, minmax(220px, 1fr));
-        grid-column-gap: 16px;
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
     }
 }
 
@@ -18,6 +16,5 @@
         grid-template-columns: 1fr;
         grid-row-gap: 8px;
         justify-content: center;
-        padding: 0 16px;
     }
 }

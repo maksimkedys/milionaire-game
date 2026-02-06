@@ -1,17 +1,19 @@
+import { DiamondShapeType } from '@/shared/types/enums';
+
 interface DiamondShapeProps {
     isActive?: boolean;
     className?: string;
-    withLines?: boolean;
+    type?: DiamondShapeType;
 }
 
 const DiamondShape = ({
     isActive = false,
     className,
-    withLines = true,
+    type = DiamondShapeType.Prize,
 }: DiamondShapeProps) => {
     const strokeColor = isActive ? '#FF8B37' : '#D0D0D8';
 
-    if (withLines) {
+    if (type === DiamondShapeType.Prize) {
         return (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,13 +37,17 @@ const DiamondShape = ({
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 240 40"
+            width="421"
+            height="72"
+            viewBox="0 0 421 72"
             fill="none"
             className={className}
             preserveAspectRatio="none"
         >
+            <path d="M404 36L421 36" stroke={strokeColor} strokeWidth="1" />
+            <path d="M0 36L17 36" stroke={strokeColor} strokeWidth="1" />
             <path
-                d="M22.2871 0.5H217.713C221.126 0.500018 224.363 2.0158 226.548 4.6377L239.349 20L226.548 35.3623C224.363 37.9842 221.126 39.5 217.713 39.5H22.2871C18.8742 39.5 15.6371 37.9842 13.4521 35.3623L0.650391 20L13.4521 4.6377C15.6371 2.0158 18.8742 0.500017 22.2871 0.5Z"
+                d="M49.0117 0.5H371.988C375.607 0.500098 379.015 2.20331 381.187 5.09766L404.374 36L381.187 66.9023C379.015 69.7967 375.607 71.4999 371.988 71.5H49.0117C45.3931 71.4999 41.9854 69.7967 39.8135 66.9023L16.625 36L39.8135 5.09766C41.9854 2.20331 45.3931 0.5001 49.0117 0.5Z"
                 fill="white"
                 stroke={strokeColor}
                 strokeWidth="1"

@@ -1,15 +1,16 @@
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 56px;
-  flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 56px;
+    flex: 1;
+    width: 100%;
+    gap: 40px;
 }
 
 @media (max-width: 768px) {
-  .content {
-    width: 100%;
-    gap: 40px;
-  }
+    .content {
+        justify-content: center;
+        gap: 100px;
+    }
 }
