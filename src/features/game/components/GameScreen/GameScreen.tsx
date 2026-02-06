@@ -1,12 +1,14 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useGameController } from '../../hooks';
+import useGameResult from '../../hooks/useGameResult';
 import type { GameConfigQuestion } from '../../config/gameConfig.types';
 import GameLayout from '../GameLayout';
 import QuestionCard from '../QuestionCard';
 import AnswerList from '../AnswerList';
 import MoneyLadder from '../MoneyLadder';
-import { LoadingSpinner, ErrorMessage } from '@/shared/ui';
+import { LoadingSpinner } from '@/shared/ui';
 import styles from './GameScreen.module.css';
 
 interface GameScreenProps {
@@ -14,6 +16,7 @@ interface GameScreenProps {
 }
 
 const GameScreen = ({ questions }: GameScreenProps) => {
+    const { clearResult } = useGameResult();
     const {
         currentQuestion,
         moneyLevels,
@@ -22,16 +25,9 @@ const GameScreen = ({ questions }: GameScreenProps) => {
         selectAnswer,
     } = useGameController(questions);
 
-    if (!questions || questions.length === 0) {
-        return (
-            <GameLayout sidebar={<MoneyLadder levels={[]} />}>
-                <ErrorMessage
-                    title="No questions available"
-                    message="Please check the game configuration"
-                />
-            </GameLayout>
-        );
-    }
+    useEffect(() => {
+        clearResult();
+    }, [clearResult]);
 
     if (!currentQuestion) {
         return (

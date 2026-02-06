@@ -4,10 +4,11 @@ import { Button, Heading, Text, ThumbImage, ErrorMessage } from '@/shared/ui';
 import { formatMoney } from '@/shared/lib';
 import { ButtonVariant, AppLink, GameStatus } from '@/shared/types';
 import { useGameResult } from '@/features/game/hooks';
+import { clearStateFromStorage } from '@/features/game/hooks/gameController';
 import styles from './ResultSummary.module.css';
 
 const ResultSummary = () => {
-    const { result, clearResult } = useGameResult();
+    const { result } = useGameResult();
 
     if (!result) {
         return (
@@ -21,7 +22,7 @@ const ResultSummary = () => {
     const isWon = result.status === GameStatus.Won;
 
     const handleTryAgain = () => {
-        clearResult();
+        clearStateFromStorage();
     };
 
     return (

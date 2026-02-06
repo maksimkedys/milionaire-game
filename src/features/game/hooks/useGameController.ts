@@ -19,6 +19,7 @@ import {
     gameReducer,
     initialState,
 } from './gameController';
+import { clearStateFromStorage } from './gameController/storage';
 
 export const useGameController = (questions: GameConfigQuestion[]) => {
     const router = useRouter();
@@ -77,6 +78,7 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
             );
             pendingResultRef.current = result;
             saveResult(result);
+            clearStateFromStorage();
             router.push(AppLink.Result);
         } else {
             dispatch({ type: 'NEXT_QUESTION', earned: newEarned });
