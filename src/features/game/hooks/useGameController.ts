@@ -13,60 +13,12 @@ import {
     createGameResult,
 } from '../logic';
 import useGameResult from './useGameResult';
-
-interface GameControllerState {
-    currentQuestionIndex: number;
-    earned: number;
-    selectedAnswerId: string | null;
-    isRevealed: boolean;
-}
-
-type GameAction =
-    | { type: 'SELECT_ANSWER'; answerId: string }
-    | { type: 'REVEAL_ANSWER' }
-    | { type: 'NEXT_QUESTION'; earned: number }
-    | { type: 'RESET' };
-
-const initialState: GameControllerState = {
-    currentQuestionIndex: 0,
-    earned: 0,
-    selectedAnswerId: null,
-    isRevealed: false,
-};
-
-const gameReducer = (
-    state: GameControllerState,
-    action: GameAction
-): GameControllerState => {
-    switch (action.type) {
-        case 'SELECT_ANSWER':
-            return {
-                ...state,
-                selectedAnswerId: action.answerId,
-            };
-
-        case 'REVEAL_ANSWER':
-            return {
-                ...state,
-                isRevealed: true,
-            };
-
-        case 'NEXT_QUESTION':
-            return {
-                ...state,
-                currentQuestionIndex: state.currentQuestionIndex + 1,
-                earned: action.earned,
-                selectedAnswerId: null,
-                isRevealed: false,
-            };
-
-        case 'RESET':
-            return initialState;
-
-        default:
-            return state;
-    }
-};
+import {
+    loadStateFromStorage,
+    saveStateToStorage,
+    gameReducer,
+    initialState,
+} from './gameController';
 
 export const useGameController = (questions: GameConfigQuestion[]) => {
     const router = useRouter();
@@ -76,45 +28,30 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         earned: number;
         status: GameStatus.Won | GameStatus.Lost;
     } | null>(null);
+    const currentQuestion =
+        state.currentQuestionIndex >= 0
+            ? questions[state.currentQuestionIndex]
+            : undefined;
 
-    const currentQuestion = questions[state.currentQuestionIndex];
+    const moneyLevels: MoneyLevel[] = useMemo(() => {
+        const getStatus = (index: number): MoneyLevelStatus => {
+            const { currentQuestionIndex } = state;
 
-    const moneyLevels: MoneyLevel[] = useMemo(
-        () =>
-            questions.map((q, index) => ({
-                amount: q.reward,
-                status:
-                    index < state.currentQuestionIndex
-                        ? MoneyLevelStatus.Passed
-                        : index === state.currentQuestionIndex
-                        ? MoneyLevelStatus.Current
-                        : MoneyLevelStatus.Default,
-            })),
-        [questions, state.currentQuestionIndex]
-    );
+            if (currentQuestionIndex < 0) {
+                return MoneyLevelStatus.Default;
+            }
 
-    useEffect(() => {
-        if (state.selectedAnswerId && !state.isRevealed) {
-            const timer = setTimeout(() => {
-                dispatch({ type: 'REVEAL_ANSWER' });
-            }, DELAY_BEFORE_REVEAL);
+            if (index < currentQuestionIndex) return MoneyLevelStatus.Passed;
+            if (index === currentQuestionIndex) return MoneyLevelStatus.Current;
 
-            return () => clearTimeout(timer);
-        }
-    }, [state.selectedAnswerId, state.isRevealed]);
+            return MoneyLevelStatus.Default;
+        };
 
-    useEffect(() => {
-        if (!state.isRevealed || !currentQuestion || !state.selectedAnswerId) {
-            return;
-        }
-
-        const timer = setTimeout(() => {
-            handleAnswerResult();
-        }, DELAY_BEFORE_NEXT);
-
-        return () => clearTimeout(timer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state.isRevealed, state.selectedAnswerId]);
+        return questions.map((q, index) => ({
+            amount: q.reward,
+            status: getStatus(index),
+        }));
+    }, [questions, state]);
 
     const handleAnswerResult = useCallback(() => {
         if (!currentQuestion || !state.selectedAnswerId) return;
@@ -161,6 +98,48 @@ export const useGameController = (questions: GameConfigQuestion[]) => {
         },
         [state.selectedAnswerId, currentQuestion]
     );
+
+    useEffect(() => {
+        const savedState = loadStateFromStorage(questions);
+
+        if (savedState) {
+            dispatch({ type: 'HYDRATE_FROM_STORAGE', payload: savedState });
+        } else {
+            dispatch({ type: 'INIT_FIRST_QUESTION' });
+        }
+    }, [questions]);
+
+    useEffect(() => {
+        if (state.currentQuestionIndex < 0) return;
+        saveStateToStorage(state, questions);
+    }, [state, questions]);
+
+    useEffect(() => {
+        if (state.selectedAnswerId && !state.isRevealed) {
+            const timer = setTimeout(() => {
+                dispatch({ type: 'REVEAL_ANSWER' });
+            }, DELAY_BEFORE_REVEAL);
+
+            return () => clearTimeout(timer);
+        }
+    }, [state.selectedAnswerId, state.isRevealed]);
+
+    useEffect(() => {
+        if (!state.isRevealed || !currentQuestion || !state.selectedAnswerId) {
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            handleAnswerResult();
+        }, DELAY_BEFORE_NEXT);
+
+        return () => clearTimeout(timer);
+    }, [
+        currentQuestion,
+        handleAnswerResult,
+        state.isRevealed,
+        state.selectedAnswerId,
+    ]);
 
     return {
         currentQuestion,

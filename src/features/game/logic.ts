@@ -12,7 +12,7 @@ export const createInitialGameState = (
 });
 
 /**
- * Перевіряє чи відповідь правильна
+ * Checks if the answer is correct
  */
 export const isAnswerCorrect = (
     answerId: string,
@@ -22,7 +22,7 @@ export const isAnswerCorrect = (
 };
 
 /**
- * Визначає чи це останнє питання
+ * Checks if the question is the last one
  */
 export const isLastQuestion = (
     currentIndex: number,
@@ -32,7 +32,7 @@ export const isLastQuestion = (
 };
 
 /**
- * Обчислює винагороду
+ * Calculates the reward
  */
 export const calculateReward = (
     isCorrect: boolean,
@@ -46,7 +46,7 @@ export const calculateReward = (
 };
 
 /**
- * Визначає статус гри після відповіді
+ * Determines the game status after the answer
  */
 export const determineGameStatus = (
     isCorrect: boolean,
@@ -59,7 +59,7 @@ export const determineGameStatus = (
 };
 
 /**
- * Створює результат гри
+ * Creates the game result
  */
 export const createGameResult = (
     earned: number,
@@ -70,7 +70,7 @@ export const createGameResult = (
 });
 
 /**
- * Валідує індекс питання
+ * Validates the question index
  */
 export const isValidQuestionIndex = (
     index: number,
