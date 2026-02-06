@@ -12,6 +12,8 @@
 .primary {
     background-color: var(--orange-100);
     color: var(--white-100);
+    width: 294px;
+    text-align: center;
 }
 
 .primary:hover {
