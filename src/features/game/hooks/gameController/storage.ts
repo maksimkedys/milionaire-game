@@ -1,6 +1,30 @@
 import type { GameConfigQuestion } from '../../config/gameConfig.types';
 import type { GameControllerState, SavedGameState } from './types';
-import { STORAGE_KEY } from '../../constants';
+import { STORAGE_KEY, STORAGE_ENCRYPTION_KEY } from '../../constants';
+
+const encrypt = (data: string, key: string): string => {
+    let result = '';
+    for (let i = 0; i < data.length; i++) {
+        const charCode = data.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+        result += String.fromCharCode(charCode);
+    }
+    return btoa(result);
+};
+
+const decrypt = (encrypted: string, key: string): string => {
+    try {
+        const decoded = atob(encrypted);
+        let result = '';
+        for (let i = 0; i < decoded.length; i++) {
+            const charCode =
+                decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+            result += String.fromCharCode(charCode);
+        }
+        return result;
+    } catch {
+        throw new Error('Failed to decrypt data');
+    }
+};
 
 export const loadStateFromStorage = (
     questions: GameConfigQuestion[]
@@ -8,10 +32,11 @@ export const loadStateFromStorage = (
     if (typeof window === 'undefined') return null;
 
     try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return null;
+        const encrypted = localStorage.getItem(STORAGE_KEY);
+        if (!encrypted) return null;
 
-        const saved: SavedGameState = JSON.parse(raw);
+        const decrypted = decrypt(encrypted, STORAGE_ENCRYPTION_KEY);
+        const saved: SavedGameState = JSON.parse(decrypted);
         const currentQuestionIds = questions.map((q) => q.id);
 
         const isSameQuestions =
@@ -45,7 +70,9 @@ export const saveStateToStorage = (
             state,
         };
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        const json = JSON.stringify(payload);
+        const encrypted = encrypt(json, STORAGE_ENCRYPTION_KEY);
+        localStorage.setItem(STORAGE_KEY, encrypted);
     } catch (error) {
         console.error('Failed to save game state to localStorage:', error);
     }
